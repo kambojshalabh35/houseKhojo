@@ -1,0 +1,196 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="{% static 'assets/img/favicon.png' %}" rel="icon">
+    <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+
+    <!-- CSS Files -->
+    <link href="{% static 'assets/vendor/animate.css/animate.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Main CSS File -->
+    <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+    <title>
+        {% block title %}{% endblock %}
+    </title>
+  </head>
+  <body>
+  
+  <div class="click-closed"></div>
+
+  <!--/ Form Search Star /-->
+  <div class="box-collapse">
+
+    <div class="title-box-d">
+      <h3 class="title-d">Predict Property Price</h3>
+    </div>
+
+    <span class="close-box-collapse right-boxed bi bi-x"></span>
+  	
+    <div class="box-collapse-wrap form">
+      <form class="form-a" method="post">
+        {% csrf_token %}
+        <div class="row">
+          
+          <div class="col-md-4 mb-4">
+            <div class="form-group">
+              <label class="pb-2" for="Longitude">Longitude</label>
+              <input type="number" class="form-control form-control-lg form-control-a" value="-121" id="Longitude" name="Longitude" placeholder="Longitude">
+            </div>
+          </div>
+          
+          <div class="col-md-4 mb-4">
+            <div class="form-group">
+              <label class="pb-2" for="Latitude">Latitude</label>
+              <input type="number" class="form-control form-control-lg form-control-a" value="132" id="Latitude" name="Latitude" placeholder="Latitude">
+            </div>
+          </div>
+          
+          <div class="col-md-4 mb-4">
+            <div class="form-group">
+              <label class="pb-2" for="Age_of_House">Age of House</label>
+              <input type="number" class="form-control form-control-lg form-control-a" value="1" id="Age_of_House" name="Age_of_House" placeholder="Age of House">
+            </div>
+          </div>
+          
+          <div class="col-md-4 mb-4">
+            <div class="form-group">
+              <label class="pb-2" for="Total_Rooms">Total Rooms</label>
+              <input type="number" class="form-control form-control-lg form-control-a" value="5" id="Total_Rooms" name="Total_Rooms" placeholder="Total Rooms">
+            </div>
+          </div>
+          
+          <div class="col-md-4 mb-4">
+            <div class="form-group">
+              <label class="pb-2" for="Number_of_Bedrooms">Number of Bedrooms</label>
+              <input type="number" class="form-control form-control-lg form-control-a" value="3" id="Number_of_Bedrooms" name="Number_of_Bedrooms" placeholder="Number of Bedrooms">
+            </div>
+          </div>
+          
+          <div class="col-md-4 mb-4">
+            <div class="form-group">
+              <label class="pb-2" for="Households">Households</label>
+              <input type="number" class="form-control form-control-lg form-control-a" value="2" id="Households" name="Households" placeholder="Households">
+            </div>
+          </div>	
+          
+          <div class="col-md-6 mb-4">
+            <div class="form-group">
+              <input class="d-none" onChange="checkedChangeHandler(this)" type="hidden" value="False" name="Inland_v" id="Inland_v">
+              <input class="form-check-input" onChange="checkedChangeHandler(this)" type="checkbox" name="Inland" id="Inland">
+              <label class="pb-2 ms-2" for="Inland">Inland</label>
+            </div>
+          </div>
+          
+          <div class="col-md-6 mb-4">
+            <div class="form-group">
+              <input class="d-none" onChange="checkedChangeHandler(this)" type="hidden" value="False" name="Island_v" id="Island_v">
+              <input class="form-check-input" onChange="checkedChangeHandler(this)" type="checkbox" name="Island" id="Island">
+              <label class="pb-2 ms-2" for="Island">Island</label>
+            </div>
+          </div>
+          
+          <div class="col-md-6 mb-4">
+            <div class="form-group">
+              <input class="d-none" onChange="checkedChangeHandler(this)" type="hidden" value="False" name="Near_the_Bay_v" id="Near_the_Bay_v">
+              <input class="form-check-input" onChange="checkedChangeHandler(this)" type="checkbox" name="Near_the_Bay" id="Near_the_Bay">
+              <label class="pb-2 ms-2" for="Near_the_Bay">Near the Bay</label>
+            </div>
+          </div>
+          
+          <div class="col-md-6 mb-4">
+            <div class="form-group">
+              <input class="d-none" onChange="checkedChangeHandler(this)" type="hidden" value="False" name="Near_the_Ocean_v" id="Near_the_Ocean_v">
+              <input class="form-check-input" onChange="checkedChangeHandler(this)" type="checkbox" name="Near_the_Ocean" id="Near_the_Ocean">
+              <label class="pb-2 ms-2" for="Near_the_Ocean">Near the Ocean</label>
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <button type="submit" class="btn btn-b">Predict</button>
+          </div>
+
+        </div>
+      </form>
+    </div>
+  </div><!-- End Property Search Section -->
+
+  <script>
+    const checkedChangeHandler = (e) => {
+      if(e.checked){
+        document.getElementById(e.id + "_v").value = "True";
+      }else{
+        document.getElementById(e.id + "_v").value = "False";
+      }
+    }
+  </script>
+
+  <!-- ======= Header/Navbar ======= -->
+  <nav class="navbar navbar-default navbar-trans navbar-expand-lg fixed-top">
+    <div class="container">
+      <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarDefault" aria-controls="navbarDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <a class="navbar-brand text-brand" href="/">house<span class="color-b">Khojo</span></a>
+
+      <div class="navbar-collapse collapse justify-content-center" id="navbarDefault">
+        <ul class="navbar-nav">
+
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link " href="/about">About</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link " href="/contact">Contact</a>
+          </li>
+        </ul>
+      </div>
+
+      {% if isHome == True %}
+      <button type="button" class="btn btn-b-n navbar-toggle-box navbar-toggle-box-collapse py-4 px-4 rounded" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01">
+        House Price Prediction
+      </button>
+      {% endif %}
+    </div>
+  </nav><!-- End Header/Navbar -->
+
+
+
+    {% block main %}{% endblock %}
+    <!-- JS Files -->
+    <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init({
+        duration: 2000,
+        easing: "ease-in-out-back",
+
+      });
+    </script>
+
+    <!-- Main JS File -->
+    <script src="{% static 'assets/js/main.js' %}"></script>
+  </body>
+</html>

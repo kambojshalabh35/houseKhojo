@@ -1,0 +1,64 @@
+{% extends 'header.html' %}
+{% block title %}
+Output
+{% endblock %}
+{% block main %}
+
+
+<script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-core.min.js"></script>
+<script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-heatmap.min.js"></script> 
+
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+
+{% comment %} <div id="headmapGen" class="container" style="margin-top:150px; height: 80vh"></div> {% endcomment %}
+
+<div class="container" id="logLatScatter" style="height: 70vh; margin-top: 150px;"></div>
+<script>
+
+  const data = [{
+  x:{{longitudes}},
+  y:{{latitudes}},
+  mode:"markers"
+}];
+
+// Define Layout
+const layout = {
+  xaxis: {range: [-124, -114], title: "Longitude"},
+  yaxis: {range: [31, 42], title: "Latitude"},  
+  title: "Area Scatter"
+};
+
+// Display using Plotly
+Plotly.newPlot("logLatScatter", data, layout);
+</script>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="title-box-d">
+                <h3 class="title-d">Predicted Price</h3>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-bottom: 100px;">
+        <div class="col-md-12">
+            <div class="property-grid grid">
+                <div class="property-block">
+                    <a href="#">
+                        <div class="property-image">
+                            <img class="img-fluid" src="assets/img/property-1.jpg" alt="">
+                        </div>
+                    </a>
+                    <div class="property-content">
+                        <div class="price">
+                            <span class="amount fs-1">₹ {{ output }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
